@@ -1,0 +1,3 @@
+[submodule "main_dir/c_hash_table/write-a-hash-table"]
+	path = main_dir/c_hash_table/submodules/write-a-hash-table
+	url = https://github.com/jamesroutley/write-a-hash-table.git
