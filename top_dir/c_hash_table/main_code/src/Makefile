@@ -14,10 +14,6 @@ prime.o: prime.c
 clean:
 	del hash_bin.exe hash_table.o prime.o
 
-run: hash_bin.exe
-	./hash_bin.exe
-
 debug: hash_table.c prime.o
 	gcc $(GCC_FLAG) -c -D DEBUG_PRINTS hash_table.c
 	make final
-	

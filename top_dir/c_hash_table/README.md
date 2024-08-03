@@ -1,15 +1,18 @@
-Goal:
-This is a learning project to understand Hash Tables concept by designing a hash table from scratch.
+c_hash_table project
 
-Outline:
-I have written necessary functions that perform useful operations on hash tables. To verify the functionality of each of these, I created a tracefile.txt and upon running the program a results.txt file is created which outputs PASS/FAIL output for each operation mentioned in the tracefile.
+### Project information ###
+This is a project used to implement a Hash table using C. 
+The submodules folder conatins the clone of git repo from where the project was learnt from and implemented.
 
-I have also created a Makefile  (with GNU Make 4.4.1) for easier compilation and execution.
-Makefile options: 
-make   --> for general compilation which creates executable hash_bin.exe
-make run  --> compiles and runs the executable hash_bin.exe
-make debug  --> compiles with DEBUG_PRINTS macro enabled. This prints extra info useful for debugging upon execution
-make clean  --> cleans the project by deleting executables and .o files
+The main_code directory contains the code to implement the functioanalities. There is an input trace_file.txt which contains a lot of input to run and the input value to be stored across the key/ dummy value in case of delete operation (col1, col2, col3 :: Operation, key, Value/dummy value).
 
-References:
-I have taken help of "https://github.com/codecrafters-io/build-your-own-x" hash table project as guideline to achieve this. I have added the git repo as a submodule to this project
+The corresponding output for the testcases ran can be found in the results.txt file.
+
+Additionally, a debugging compiler macro (DEBUG_PRINTS) is also added which the makeilfe uses during build.
+
+### How to run ###
+1) Move to directory top_dir\c_hash_table\main_code\src
+2) Use the appropriate make command:
+    make        --> This would build the code and generate the object files and executable. (same as "make all" and "make final")
+    make clean  --> Delete object files and executable
+    make debug  --> Would compile with the DEBUG_PRINTS macro defined
