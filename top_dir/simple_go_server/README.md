@@ -10,3 +10,10 @@ localhost:8080/search.html  --> A form is present to input the artist's name and
 
 Note: This is a leanring project made at a very nascent stage with the help of the below resource:
 https://www.youtube.com/watch?v=ASBUp7stqjo&list=PL5dTjWUk_cPYztKD7WxVFluHvpBNM28N9
+
+
+Procedure to run:
+1) Go to the path xxx/top_dir/simple_go_server/src
+2) go build
+3) go run main.go
+4) Allow firewall permissions if prompted, go to a browser and enter localhost:8080/
