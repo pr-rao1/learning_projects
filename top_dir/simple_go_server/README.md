@@ -17,3 +17,8 @@ Procedure to run:
 2) go build
 3) go run main.go
 4) Allow firewall permissions if prompted, go to a browser and enter localhost:8080/
+
+Debugging:
+1) If you see Main page still on localhost:8080 after terminating server, then it might be due to 
+    a) Concurrency of the go routine triggering ListenAndServe() subroutine. Use "err != http.ErrServerClosed" when triggering it. Or replace "log.Fatal(err)" with some printf
+    b) OS waiting for TIME_WAIT (40-120 seconds) for transmission of residual packets. It is recommended to wait out the time. Else use "SO_REUSEADDR" (for development purpose only).
