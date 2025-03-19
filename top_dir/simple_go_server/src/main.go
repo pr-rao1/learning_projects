@@ -1,9 +1,14 @@
 package main
 
 import (
+	"context"
 	"fmt"
 	"log"
 	"net/http"
+	"os"
+	"os/signal"
+	"syscall"
+	"time"
 )
 
 func infoHandler(w http.ResponseWriter, r *http.Request) {
@@ -44,9 +49,30 @@ func main() {
 	http.HandleFunc("/search", searchHandler)
 	http.HandleFunc("/info", infoHandler)
 
+	server := &http.Server{
+		Addr:    ":8080",
+		Handler: fileServer, // File server instead of ServeMux
+	}
+
 	fmt.Println("Starting server at port 8080...")
-	if err := http.ListenAndServe(":8080", nil); err != nil {
+	if err := server.ListenAndServe(); err != nil {
 		log.Fatal(err)
+	}
+
+	stop := make(chan os.Signal, 1)
+	signal.Notify(stop, os.Interrupt, syscall.SIGTERM)
+
+	<-stop // Wait for termination signal
+	fmt.Println("\nShutting down server...")
+
+	// Graceful shutdown with a timeout
+	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	defer cancel()
+
+	if err := server.Shutdown(ctx); err != nil {
+		fmt.Println("Server shutdown failed:", err)
+	} else {
+		fmt.Println("Server stopped gracefully.")
 	}
 
 }
