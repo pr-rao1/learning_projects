@@ -51,13 +51,15 @@ func main() {
 
 	server := &http.Server{
 		Addr:    ":8080",
-		Handler: fileServer, // File server instead of ServeMux
+		Handler: nil, // nil here to handle all type of routes; Allows http.HandleFunc routes to work
 	}
-
-	fmt.Println("Starting server at port 8080...")
-	if err := server.ListenAndServe(); err != nil {
-		log.Fatal(err)
-	}
+	go func() {
+		fmt.Println("Starting server at port 8080...")
+		if err := server.ListenAndServe(); err != nil && err != http.ErrServerClosed {
+			log.Fatalf("Server error: %v", err)
+		}
+		fmt.Println("Server closed")
+	}()
 
 	stop := make(chan os.Signal, 1)
 	signal.Notify(stop, os.Interrupt, syscall.SIGTERM)
@@ -74,5 +76,4 @@ func main() {
 	} else {
 		fmt.Println("Server stopped gracefully.")
 	}
-
 }
